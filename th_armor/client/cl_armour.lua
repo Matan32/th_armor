@@ -20,7 +20,7 @@ AddEventHandler('th_armor:armor', function()
   else
     TriggerEvent('th_armor:vest')
     exports['np-taskbar']:taskBar(5000, 'Setting Up Armor...')
-    TriggerEvent('notification', 'Succseesfully equiped an armor')
+    TriggerEvent('notification', 'Succseesfully equipped an armor')
     TriggerServerEvent('th_armor:armorremove')
     SetPedArmour(GetPlayerPed(-1), 100)
   end
