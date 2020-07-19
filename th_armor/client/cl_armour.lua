@@ -18,39 +18,26 @@ AddEventHandler('th_armor:armor', function()
   if GetPedArmour(GetPlayerPed(-1)) == 100 then
     TriggerEvent('notification', 'You are already wearing armor ')
   else
-    SetPedArmour(GetPlayerPed(-1), 0)
-    ClearPedBloodDamage(GetPlayerPed(-1))
-    ResetPedVisibleDamage(GetPlayerPed(-1))
-    ClearPedLastWeaponDamage(GetPlayerPed(-1))
-    ResetPedMovementClipset(GetPlayerPed(-1), 0)
-
-    TriggerServerEvent('th_armor:armorremove')
-    TriggerEvent('skinchanger:getSkin', function(skin)
-
-      if skin.sex == 0 then
-        TriggerEvent('vest')
-        exports['np-taskbar']:taskBar(5000, 'Setting Up Armor...')
-        SetPedArmour(GetPlayerPed(-1), 100)
+    local finished = exports["reload-skillbar"]:taskBar(4000,math.random(5,15))
+    if finished ~= 100 then
+        TriggerEvent('notification', 'Failed to equip armor', 2)
+    else
+      local finished2 = exports["reload-skillbar"]:taskBar(4000,math.random(5,15))
+      if finished2 ~= 100 then
+          TriggerEvent('notification', 'Failed to equip armor', 2)
       else
-        TriggerEvent('vest')
-        exports['np-taskbar']:taskBar(5000, 'Setting Up Armor...')
-        SetPedArmour(GetPlayerPed(-1), 100)
+      TriggerEvent('th_armor:vest')
+      exports['np-taskbar']:taskBar(5000, 'Setting Up Armor...')
+      TriggerEvent('notification', 'Succseesfully equiped an armor')
+      SetPedArmour(GetPlayerPed(-1), 100)
       end
-
-    end)
+    end
   end
-
 end)
 
-RegisterNetEvent("vest")
-AddEventHandler("vest", function()
+RegisterNetEvent("th_armor:vest")
+AddEventHandler("th_armor:vest", function()
     local playerPed = GetPlayerPed(-1)
     vestDrawable, vestTexture, vestPalette = GetPedDrawableVariation(playerPed, 9), GetPedTextureVariation(playerPed, 9), GetPedPaletteVariation(playerPed, 9)
     TaskPlayAnim(playerPed, "clothingshirt", "try_shirt_positive_a", 3.5, -8, -1, 49, 0, 0, 0, 0)
   end)
-
-
-
-
-
-
