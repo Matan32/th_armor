@@ -1,6 +1,6 @@
 # th_armor
 
-#Not supported anymore (abandoned)
+# Not supported anymore (abandoned)
 
 A basic remake of esx_armour that uses progress bars and skill bar. For the th_armor to work you need np-taskbar and for the skillbar u need reload-skillbar.
 
